@@ -2,10 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
@@ -47,7 +44,18 @@ public class Main {
         System.out.println(ft);
         a.setTimes(null, null, ft);
         System.out.println(a.readAttributes().creationTime().toString());
-        
+
+        Path path2 = Paths.get(".");
+        try(DirectoryStream<Path> ds = Files.newDirectoryStream(path2);){
+            for (Path p : ds){
+                System.out.println(p.getFileName());
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
 
     }
 }
