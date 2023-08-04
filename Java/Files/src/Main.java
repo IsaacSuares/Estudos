@@ -6,8 +6,11 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.FileTime;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoField;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -34,8 +37,17 @@ public class Main {
 
         File file = new File(newFilePath.toString());
 
-        LocalDateTime date = LocalDateTime.now().minusYears(20);
-        boolean isModified = file.setLastModified(date.toInstant(ZoneOffset.UTC).toEpochMilli());
-        System.out.println(isModified);
+        //LocalDateTime date = LocalDateTime.now().minusYears(20);
+        //boolean isModified = file.setLastModified(date.toInstant(ZoneOffset.UTC).toEpochMilli());
+        //System.out.println(isModified);
+
+        BasicFileAttributeView a = Files.getFileAttributeView(newFilePath, BasicFileAttributeView.class);
+        System.out.println(a.readAttributes().creationTime().toString());
+        FileTime ft = FileTime.fromMillis(LocalDateTime.now().minusYears(5).toInstant(ZoneOffset.UTC).toEpochMilli());
+        System.out.println(ft);
+        a.setTimes(null, null, ft);
+        System.out.println(a.readAttributes().creationTime().toString());
+        
+
     }
 }
