@@ -10,8 +10,13 @@
     <h1>Teste Site</h1>
     <p>Paragrafos teste</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum numquam necessitatibus itaque quibusdam. Natus sapiente quas placeat eum corporis modi aspernatur voluptates soluta explicabo deserunt, omnis numquam sed autem maxime!</p>
-    <script 
-        src="script.js">
+    <button id="btnTeste" type="button">Teste</button>
+    <script>
+        const btnTestef = document.getElementById("btnTeste")
+        console.log(btnTestef)
+        btnTestef.addEventListener("click", function(){
+            console.log("Clickou")
+        })
     </script>
 </body>
 </html>
